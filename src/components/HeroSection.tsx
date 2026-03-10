@@ -1,15 +1,41 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
-import heroBg from "@/assets/hero-bg.jpg";
+import { useRef } from "react";
+import heroBg from "@/assets/hero-bg.jpg"; // Fallback
+import villaVideo from "@/assets/villa-video.mp4";
 import { heroContent } from "@/data/content";
 
 const HeroSection = () => {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  const videoY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const videoScale = useTransform(scrollYProgress, [0, 1], [1.1, 1.3]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0">
-        <img src={heroBg} alt="Hyderabad Skyline" className="w-full h-full object-cover" loading="eager" />
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/60 to-primary/90" />
-      </div>
+    <section
+      id="home"
+      ref={containerRef}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+    >
+      <motion.div style={{ y: videoY, scale: videoScale, opacity }} className="absolute inset-0">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster={heroBg}
+          className="w-full h-full object-cover animate-float-slow"
+        >
+          <source src={villaVideo} type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-primary/25" />
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/40 via-transparent to-primary/60" />
+      </motion.div>
 
       <div className="relative z-10 container mx-auto px-4 text-center max-w-5xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }} className="mb-6">
@@ -18,22 +44,22 @@ const HeroSection = () => {
           </span>
         </motion.div>
 
-        <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.4 }} className="text-4xl md:text-5xl lg:text-7xl font-heading font-bold text-primary-foreground leading-tight mb-6">
+        <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.4 }} className="text-4xl md:text-5xl lg:text-7xl font-heading font-bold text-white leading-tight mb-6 drop-shadow-2xl">
           {heroContent.heading}{" "}
           <span className="text-gradient-gold">{heroContent.highlight}</span>
           <br />
-          <span className="text-3xl md:text-4xl lg:text-5xl font-light italic">{heroContent.subheading}</span>
+          <span className="text-3xl md:text-4xl lg:text-5xl font-light italic text-white/90">{heroContent.subheading}</span>
         </motion.h1>
 
-        <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.6 }} className="text-lg md:text-xl text-primary-foreground/80 max-w-3xl mx-auto mb-10 font-light leading-relaxed">
+        <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.6 }} className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto mb-10 font-light leading-relaxed drop-shadow-md">
           {heroContent.description}
         </motion.p>
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.8 }} className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link to="/projects" className="gradient-gold-btn px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-gold">
+          <Link to="/projects" className="gradient-gold-btn px-8 py-4 rounded-lg text-lg">
             {heroContent.ctaPrimary}
           </Link>
-          <Link to="/contact" className="px-8 py-4 rounded-lg text-lg font-semibold border-2 border-secondary/50 text-primary-foreground hover:bg-secondary/10 transition-all duration-300 hover:scale-105">
+          <Link to="/contact" className="site-button-outline px-8 py-4 rounded-lg text-lg font-semibold">
             {heroContent.ctaSecondary}
           </Link>
         </motion.div>

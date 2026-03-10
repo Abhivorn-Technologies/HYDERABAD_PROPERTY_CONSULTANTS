@@ -9,7 +9,7 @@ const FAQSection = () => {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="section-padding" ref={ref}>
+    <section id="faq" className="section-padding bg-cream-white" ref={ref}>
       <div className="container mx-auto max-w-3xl">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} className="text-center mb-16">
           <span className="text-secondary font-medium text-sm uppercase tracking-widest">FAQ</span>

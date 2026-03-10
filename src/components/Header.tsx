@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone, ChevronDown } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "@/assets/logo.png";
-import { mainNavLinks, companyDropdownLinks } from "@/data/content";
+import { mainNavLinks, companyDropdownLinks, contactInfo } from "@/data/content";
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -37,17 +37,17 @@ const Header = () => {
   }, [location.pathname]);
 
   const isActive = (href: string) => location.pathname === href;
+  const isCompanyActive = companyDropdownLinks.some((link) => isActive(link.href));
 
   return (
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "bg-primary/95 backdrop-blur-xl shadow-luxury py-1"
-          : "bg-transparent py-4"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
+        ? "bg-primary/90 backdrop-blur-xl shadow-luxury py-3 border-b border-white/10"
+        : "bg-transparent py-6"
+        }`}
     >
       <div className="container mx-auto flex items-center justify-between px-4">
         {/* Logo */}
@@ -65,13 +65,26 @@ const Header = () => {
             <Link
               key={link.href}
               to={link.href}
-              className={`text-sm font-medium transition-colors duration-300 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-secondary after:transition-all after:duration-300 hover:after:w-full ${
-                isActive(link.href)
-                  ? "text-secondary after:w-full"
-                  : "text-primary-foreground/80 hover:text-secondary"
-              }`}
+              className={`text-sm font-semibold transition-all duration-300 relative py-1 px-1 group ${isActive(link.href)
+                ? "text-secondary"
+                : "text-primary-foreground/80 hover:text-secondary"
+                }`}
             >
               {link.label}
+
+              {/* Sliding Bottom Border */}
+              {isActive(link.href) && (
+                <motion.div
+                  layoutId="nav-underline"
+                  className="absolute -bottom-1 left-0 right-0 h-[2px] bg-secondary rounded-full"
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                />
+              )}
+
+              {/* Hover Underline (Expanding) */}
+              {!isActive(link.href) && (
+                <div className="absolute -bottom-1 left-1/2 w-0 h-[2px] bg-secondary/40 group-hover:w-full group-hover:left-0 transition-all duration-300 rounded-full" />
+              )}
             </Link>
           ))}
 
@@ -79,13 +92,28 @@ const Header = () => {
           <div ref={dropdownRef} className="relative">
             <button
               onClick={() => setCompanyOpen(!companyOpen)}
-              className="flex items-center gap-1 text-sm font-medium text-primary-foreground/80 hover:text-secondary transition-colors duration-300"
+              className={`flex items-center gap-1 text-sm font-semibold transition-all duration-300 relative py-1 px-1 group ${isCompanyActive ? "text-secondary" : "text-primary-foreground/80 hover:text-secondary"
+                }`}
             >
               Company
               <ChevronDown
                 size={15}
                 className={`transition-transform duration-300 ${companyOpen ? "rotate-180" : ""}`}
               />
+
+              {/* Sliding Bottom Border */}
+              {isCompanyActive && (
+                <motion.div
+                  layoutId="nav-underline"
+                  className="absolute -bottom-1 left-0 right-0 h-[2px] bg-secondary rounded-full"
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                />
+              )}
+
+              {/* Hover Underline (Expanding) */}
+              {!isCompanyActive && (
+                <div className="absolute -bottom-1 left-1/2 w-0 h-[2px] bg-secondary/40 group-hover:w-full group-hover:left-0 transition-all duration-300 rounded-full" />
+              )}
             </button>
             <AnimatePresence>
               {companyOpen && (
@@ -100,11 +128,10 @@ const Header = () => {
                     <Link
                       key={link.href}
                       to={link.href}
-                      className={`block px-5 py-3 text-sm transition-colors duration-200 ${
-                        isActive(link.href)
-                          ? "text-secondary bg-secondary/10"
-                          : "text-primary-foreground/80 hover:text-secondary hover:bg-secondary/5"
-                      }`}
+                      className={`block px-5 py-3 text-sm transition-colors duration-200 ${isActive(link.href)
+                        ? "text-secondary bg-secondary/10"
+                        : "text-primary-foreground/80 hover:text-secondary hover:bg-secondary/5"
+                        }`}
                     >
                       {link.label}
                     </Link>
@@ -118,15 +145,15 @@ const Header = () => {
         {/* Desktop Right */}
         <div className="hidden md:flex items-center gap-4">
           <a
-            href="tel:+91XXXXXXXXXX"
+            href={`tel:${contactInfo.phone.replace(/\s+/g, "")}`}
             className="flex items-center gap-2 text-primary-foreground/80 hover:text-secondary transition-colors text-sm"
           >
             <Phone size={16} />
-            <span>+91 XXXXX XXXXX</span>
+            <span>{contactInfo.phone}</span>
           </a>
           <Link
             to="/contact"
-            className="gradient-gold-btn px-5 py-2.5 rounded-lg text-sm transition-all duration-300 hover:scale-105"
+            className="gradient-gold-btn px-5 py-2.5 rounded-lg text-sm"
           >
             Book Consultation
           </Link>
@@ -155,9 +182,8 @@ const Header = () => {
                 <Link
                   key={link.href}
                   to={link.href}
-                  className={`text-lg font-medium transition-colors ${
-                    isActive(link.href) ? "text-secondary" : "text-primary-foreground/90 hover:text-secondary"
-                  }`}
+                  className={`text-lg font-medium transition-colors ${isActive(link.href) ? "text-secondary" : "text-primary-foreground/90 hover:text-secondary"
+                    }`}
                 >
                   {link.label}
                 </Link>
@@ -186,9 +212,8 @@ const Header = () => {
                       <Link
                         key={link.href}
                         to={link.href}
-                        className={`text-base transition-colors ${
-                          isActive(link.href) ? "text-secondary" : "text-primary-foreground/70 hover:text-secondary"
-                        }`}
+                        className={`text-base transition-colors ${isActive(link.href) ? "text-secondary" : "text-primary-foreground/70 hover:text-secondary"
+                          }`}
                       >
                         {link.label}
                       </Link>

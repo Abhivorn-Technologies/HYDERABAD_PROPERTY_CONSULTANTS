@@ -43,11 +43,11 @@ export const services = [
 
 // ── Projects ──
 export const projects = [
-  { image: "project-1", name: "Prestige Grand Oaks", location: "Financial District", type: "Luxury Apartments", price: "₹1.2 Cr onwards" },
-  { image: "project-2", name: "My Home Bhooja", location: "Kokapet", type: "Premium Villas", price: "₹2.5 Cr onwards" },
-  { image: "project-3", name: "Aparna Sarovar", location: "Nallagandla", type: "Gated Community", price: "₹85 L onwards" },
-  { image: "project-1", name: "Phoenix One Hyderabad", location: "Narsingi", type: "Ultra Luxury", price: "₹3.5 Cr onwards" },
-  { image: "project-2", name: "Rajapushpa Atria", location: "Kokapet", type: "Premium Apartments", price: "₹1.8 Cr onwards" },
+  { image: "grand-oaks", name: "Prestige Grand Oaks", location: "Financial District", type: "Luxury Apartments", price: "₹1.2 Cr onwards" },
+  { image: "bhooja-villas", name: "My Home Bhooja", location: "Kokapet", type: "Premium Villas", price: "₹2.5 Cr onwards" },
+  { image: "aparna-sarovar", name: "Aparna Sarovar", location: "Nallagandla", type: "Gated Community", price: "₹85 L onwards" },
+  { image: "phoenix-one", name: "Phoenix One Hyderabad", location: "Narsingi", type: "Ultra Luxury", price: "₹3.5 Cr onwards" },
+  { image: "rajapushpa-atria", name: "Rajapushpa Atria", location: "Kokapet", type: "Premium Apartments", price: "₹1.8 Cr onwards" },
 ];
 
 // ── Why Choose Us ──
@@ -104,8 +104,8 @@ export const faqs = [
 // ── Contact ──
 export const contactInfo = {
   location: "Hyderabad, Telangana",
-  phone: "+91 XXXXX XXXXX",
-  email: "info@hyderabadpropertyconsultants.com",
+  phone: "+91 62812 45149",
+  email: "ravindra@hyderabadpropertyconsultants.com",
 };
 
 // ── Nav ──
