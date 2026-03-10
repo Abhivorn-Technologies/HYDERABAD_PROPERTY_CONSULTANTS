@@ -1,0 +1,99 @@
+import { motion, useInView } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import aboutBg from "@/assets/about-bg.jpg";
+
+const stats = [
+  { value: 1000, suffix: "+", label: "Happy Buyers" },
+  { value: 50, suffix: "+", label: "Projects" },
+  { value: 20, suffix: "+", label: "Developer Partners" },
+  { value: 10, suffix: "+", label: "Years Experience" },
+];
+
+const Counter = ({ target, suffix }: { target: number; suffix: string }) => {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true });
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!inView) return;
+    let start = 0;
+    const duration = 2000;
+    const step = target / (duration / 16);
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= target) {
+        setCount(target);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(start));
+      }
+    }, 16);
+    return () => clearInterval(timer);
+  }, [inView, target]);
+
+  return (
+    <span ref={ref} className="text-3xl md:text-4xl font-heading font-bold text-secondary">
+      {count.toLocaleString()}{suffix}
+    </span>
+  );
+};
+
+const AboutSection = () => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-100px" });
+
+  return (
+    <section id="about" className="section-padding bg-background" ref={ref}>
+      <div className="container mx-auto">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          {/* Image */}
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.7 }}
+            className="relative rounded-2xl overflow-hidden shadow-luxury"
+          >
+            <img src={aboutBg} alt="Real estate consultation" className="w-full h-[400px] lg:h-[500px] object-cover" loading="lazy" />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent" />
+          </motion.div>
+
+          {/* Content */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.2 }}
+          >
+            <span className="text-secondary font-medium text-sm uppercase tracking-widest">Who We Are</span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-foreground mt-3 mb-6 leading-tight">
+              Trusted Real Estate
+              <br />
+              <span className="text-gradient-gold">Advisors</span> in Hyderabad
+            </h2>
+            <p className="text-muted-foreground leading-relaxed mb-4">
+              At Hyderabad Property Consultants, we bridge the gap between buyers and top real estate developers.
+              Our goal is to simplify the property buying process by offering transparent information,
+              expert guidance, and access to verified projects.
+            </p>
+            <p className="text-muted-foreground leading-relaxed mb-8">
+              Whether you are buying your first home, upgrading your lifestyle, or investing in real estate,
+              our team ensures you get the best property options suited to your needs.
+              Our services are <strong className="text-foreground">completely free for customers</strong>.
+            </p>
+
+            {/* Stats */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {stats.map((stat) => (
+                <div key={stat.label} className="text-center">
+                  <Counter target={stat.value} suffix={stat.suffix} />
+                  <p className="text-muted-foreground text-sm mt-1">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default AboutSection;
