@@ -87,6 +87,11 @@
   .glass-card {
     @apply bg-card/80 backdrop-blur-xl border border-border/50 shadow-luxury;
   }
+  .site-card {
+    @apply bg-card/90 backdrop-blur-sm border border-border/30;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  }
   .glass-dark {
     background: hsla(169, 62%, 15%, 0.85);
     backdrop-filter: blur(20px);
@@ -110,6 +115,9 @@
   }
   .section-padding {
     @apply py-20 md:py-28 lg:py-32 px-4 md:px-8;
+  }
+  .bg-gradient-site {
+    background: linear-gradient(180deg, #FFFFFF 0%, #F8F8F8 60%, #EFEFEF 100%);
   }
 }
 

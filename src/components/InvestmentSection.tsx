@@ -2,17 +2,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { TrendingUp, Star, MapPin } from "lucide-react";
 import investmentBg from "@/assets/investment-bg.jpg";
-
-const areas = [
-  { name: "Financial District", growth: "High", roi: "12-15%", rating: 5 },
-  { name: "Kokapet", growth: "Very High", roi: "15-20%", rating: 5 },
-  { name: "Tellapur", growth: "High", roi: "10-14%", rating: 4 },
-  { name: "Narsingi", growth: "High", roi: "12-16%", rating: 4 },
-  { name: "Shamshabad", growth: "Moderate", roi: "8-12%", rating: 4 },
-  { name: "Shadnagar", growth: "Emerging", roi: "10-15%", rating: 3 },
-  { name: "Kollur", growth: "Very High", roi: "14-18%", rating: 5 },
-  { name: "Patancheru", growth: "Moderate", roi: "8-12%", rating: 3 },
-];
+import { investmentAreas } from "@/data/content";
 
 const InvestmentSection = () => {
   const ref = useRef(null);
@@ -25,12 +15,7 @@ const InvestmentSection = () => {
         <div className="absolute inset-0 bg-primary/90" />
       </div>
       <div className="container mx-auto relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
+        <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} className="text-center mb-16">
           <span className="text-secondary font-medium text-sm uppercase tracking-widest">Investment Opportunities</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-primary-foreground mt-3 mb-4">
             Hyderabad's <span className="text-gradient-gold">Hottest</span> Investment Zones
@@ -41,14 +26,8 @@ const InvestmentSection = () => {
         </motion.div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {areas.map((area, i) => (
-            <motion.div
-              key={area.name}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="glass-dark rounded-2xl p-6 hover:bg-secondary/10 transition-all duration-500 hover:-translate-y-1"
-            >
+          {investmentAreas.map((area, i) => (
+            <motion.div key={area.name} initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: i * 0.08 }} className="glass-dark rounded-2xl p-6 hover:bg-secondary/10 transition-all duration-500 hover:-translate-y-1">
               <div className="flex items-center gap-2 mb-3">
                 <MapPin className="text-secondary" size={18} />
                 <h3 className="font-heading font-semibold text-primary-foreground">{area.name}</h3>

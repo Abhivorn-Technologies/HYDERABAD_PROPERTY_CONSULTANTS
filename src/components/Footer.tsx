@@ -1,12 +1,13 @@
 import { Phone, Mail, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 import logo from "@/assets/logo.png";
+import { footerQuickLinks, footerServices, contactInfo } from "@/data/content";
 
 const Footer = () => {
   return (
     <footer className="bg-primary border-t border-secondary/10">
       <div className="container mx-auto px-4 py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {/* Brand */}
           <div>
             <img src={logo} alt="Hyderabad Property Consultants" className="h-16 w-auto mb-4" />
             <p className="text-primary-foreground/60 text-sm leading-relaxed">
@@ -14,25 +15,23 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Quick Links */}
           <div>
             <h4 className="font-heading font-bold text-primary-foreground text-lg mb-5">Quick Links</h4>
             <ul className="space-y-3">
-              {["Home", "About", "Services", "Projects", "Contact"].map((link) => (
-                <li key={link}>
-                  <a href={`#${link.toLowerCase()}`} className="text-primary-foreground/60 hover:text-secondary transition-colors text-sm">
-                    {link}
-                  </a>
+              {footerQuickLinks.map((link) => (
+                <li key={link.href}>
+                  <Link to={link.href} className="text-primary-foreground/60 hover:text-secondary transition-colors text-sm">
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Services */}
           <div>
             <h4 className="font-heading font-bold text-primary-foreground text-lg mb-5">Services</h4>
             <ul className="space-y-3">
-              {["Property Consultation", "Investment Advisory", "Site Visits", "Buyer Support", "Developer Coordination"].map((s) => (
+              {footerServices.map((s) => (
                 <li key={s}>
                   <span className="text-primary-foreground/60 text-sm">{s}</span>
                 </li>
@@ -40,21 +39,20 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact */}
           <div>
             <h4 className="font-heading font-bold text-primary-foreground text-lg mb-5">Contact</h4>
             <div className="space-y-4">
               <div className="flex items-start gap-3">
                 <MapPin className="text-secondary mt-0.5" size={16} />
-                <span className="text-primary-foreground/60 text-sm">Hyderabad, Telangana, India</span>
+                <span className="text-primary-foreground/60 text-sm">{contactInfo.location}</span>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="text-secondary" size={16} />
-                <span className="text-primary-foreground/60 text-sm">+91 XXXXX XXXXX</span>
+                <span className="text-primary-foreground/60 text-sm">{contactInfo.phone}</span>
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="text-secondary" size={16} />
-                <span className="text-primary-foreground/60 text-sm">info@hyderabadpropertyconsultants.com</span>
+                <span className="text-primary-foreground/60 text-sm">{contactInfo.email}</span>
               </div>
             </div>
           </div>

@@ -1,30 +1,42 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X, Phone, ChevronDown } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 import logo from "@/assets/logo.png";
-
-const navLinks = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Projects", href: "#projects" },
-  { label: "Why Us", href: "#why-us" },
-  { label: "Investment", href: "#investment" },
-  { label: "Process", href: "#process" },
-  { label: "Testimonials", href: "#testimonials" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Contact", href: "#contact" },
-];
+import { mainNavLinks, companyDropdownLinks } from "@/data/content";
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [companyOpen, setCompanyOpen] = useState(false);
+  const [mobileCompanyOpen, setMobileCompanyOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handler);
     return () => window.removeEventListener("scroll", handler);
   }, []);
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setCompanyOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMobileOpen(false);
+    setCompanyOpen(false);
+  }, [location.pathname]);
+
+  const isActive = (href: string) => location.pathname === href;
 
   return (
     <motion.header
@@ -33,28 +45,77 @@ const Header = () => {
       transition={{ duration: 0.6 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-primary/95 backdrop-blur-xl shadow-luxury py-2"
+          ? "bg-primary/95 backdrop-blur-xl shadow-luxury py-1"
           : "bg-transparent py-4"
       }`}
     >
       <div className="container mx-auto flex items-center justify-between px-4">
-        <a href="#home" className="flex items-center gap-3">
-          <img src={logo} alt="Hyderabad Property Consultants" className="h-12 md:h-14 w-auto" />
-        </a>
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-3">
+          <img
+            src={logo}
+            alt="Hyderabad Property Consultants"
+            className={`w-auto transition-all duration-500 ${scrolled ? "h-10 md:h-12" : "h-12 md:h-14"}`}
+          />
+        </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden xl:flex items-center gap-6">
-          {navLinks.map((link) => (
-            <a
+        {/* Desktop Nav — Center */}
+        <nav className="hidden xl:flex items-center gap-7">
+          {mainNavLinks.map((link) => (
+            <Link
               key={link.href}
-              href={link.href}
-              className="text-primary-foreground/80 hover:text-secondary text-sm font-medium transition-colors duration-300 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-secondary after:transition-all after:duration-300 hover:after:w-full"
+              to={link.href}
+              className={`text-sm font-medium transition-colors duration-300 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-secondary after:transition-all after:duration-300 hover:after:w-full ${
+                isActive(link.href)
+                  ? "text-secondary after:w-full"
+                  : "text-primary-foreground/80 hover:text-secondary"
+              }`}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
+
+          {/* Company Dropdown */}
+          <div ref={dropdownRef} className="relative">
+            <button
+              onClick={() => setCompanyOpen(!companyOpen)}
+              className="flex items-center gap-1 text-sm font-medium text-primary-foreground/80 hover:text-secondary transition-colors duration-300"
+            >
+              Company
+              <ChevronDown
+                size={15}
+                className={`transition-transform duration-300 ${companyOpen ? "rotate-180" : ""}`}
+              />
+            </button>
+            <AnimatePresence>
+              {companyOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-52 bg-primary/95 backdrop-blur-xl rounded-xl border border-secondary/15 shadow-luxury overflow-hidden"
+                >
+                  {companyDropdownLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      to={link.href}
+                      className={`block px-5 py-3 text-sm transition-colors duration-200 ${
+                        isActive(link.href)
+                          ? "text-secondary bg-secondary/10"
+                          : "text-primary-foreground/80 hover:text-secondary hover:bg-secondary/5"
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </nav>
 
+        {/* Desktop Right */}
         <div className="hidden md:flex items-center gap-4">
           <a
             href="tel:+91XXXXXXXXXX"
@@ -63,12 +124,12 @@ const Header = () => {
             <Phone size={16} />
             <span>+91 XXXXX XXXXX</span>
           </a>
-          <a
-            href="#contact"
+          <Link
+            to="/contact"
             className="gradient-gold-btn px-5 py-2.5 rounded-lg text-sm transition-all duration-300 hover:scale-105"
           >
             Book Consultation
-          </a>
+          </Link>
         </div>
 
         {/* Mobile Toggle */}
@@ -90,23 +151,58 @@ const Header = () => {
             className="xl:hidden bg-primary/98 backdrop-blur-xl border-t border-secondary/20"
           >
             <nav className="flex flex-col p-6 gap-4">
-              {navLinks.map((link) => (
-                <a
+              {mainNavLinks.map((link) => (
+                <Link
                   key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="text-primary-foreground/90 hover:text-secondary text-lg font-medium transition-colors"
+                  to={link.href}
+                  className={`text-lg font-medium transition-colors ${
+                    isActive(link.href) ? "text-secondary" : "text-primary-foreground/90 hover:text-secondary"
+                  }`}
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
-              <a
-                href="#contact"
-                onClick={() => setMobileOpen(false)}
+
+              {/* Mobile Company Accordion */}
+              <button
+                onClick={() => setMobileCompanyOpen(!mobileCompanyOpen)}
+                className="flex items-center justify-between text-lg font-medium text-primary-foreground/90"
+              >
+                Company
+                <ChevronDown
+                  size={18}
+                  className={`transition-transform duration-300 ${mobileCompanyOpen ? "rotate-180" : ""}`}
+                />
+              </button>
+              <AnimatePresence>
+                {mobileCompanyOpen && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    className="overflow-hidden pl-4 flex flex-col gap-3"
+                  >
+                    {companyDropdownLinks.map((link) => (
+                      <Link
+                        key={link.href}
+                        to={link.href}
+                        className={`text-base transition-colors ${
+                          isActive(link.href) ? "text-secondary" : "text-primary-foreground/70 hover:text-secondary"
+                        }`}
+                      >
+                        {link.label}
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              <Link
+                to="/contact"
                 className="gradient-gold-btn px-6 py-3 rounded-lg text-center mt-2"
               >
                 Book Consultation
-              </a>
+              </Link>
             </nav>
           </motion.div>
         )}
