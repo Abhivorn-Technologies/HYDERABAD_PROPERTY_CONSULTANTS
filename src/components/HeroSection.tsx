@@ -1,9 +1,11 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
-import heroBg from "@/assets/hero-bg.jpg"; // Fallback
+import heroBg from "@/assets/hero-bg.jpg"; 
+import mainBanner from "@/assets/main-banner.png";
 import villaVideo from "@/assets/villa-video.mp4";
 import { heroContent } from "@/data/content";
+
 
 const HeroSection = () => {
   const containerRef = useRef(null);
@@ -20,19 +22,28 @@ const HeroSection = () => {
     <section
       id="home"
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-primary"
     >
-      <motion.div style={{ y: videoY, scale: videoScale, opacity }} className="absolute inset-0">
+      <motion.div 
+        style={{ y: videoY, scale: videoScale, opacity }} 
+        className="absolute inset-0 bg-primary"
+      >
         <video
           autoPlay
           muted
           loop
           playsInline
-          poster={heroBg}
+          poster={mainBanner}
+          key={villaVideo}
           className="w-full h-full object-cover animate-float-slow"
         >
+
           <source src={villaVideo} type="video/mp4" />
         </video>
+
+
+
+
         <div className="absolute inset-0 bg-primary/25" />
         <div className="absolute inset-0 bg-gradient-to-b from-primary/40 via-transparent to-primary/60" />
       </motion.div>
