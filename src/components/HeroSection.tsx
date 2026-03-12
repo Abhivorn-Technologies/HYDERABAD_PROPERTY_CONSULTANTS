@@ -33,20 +33,16 @@ const HeroSection = () => {
           muted
           loop
           playsInline
+          preload="metadata"
           poster={mainBanner}
-          key={villaVideo}
-          className="w-full h-full object-cover animate-float-slow"
+          className="w-full h-full object-cover animate-float-slow will-change-transform"
         >
-
           <source src={villaVideo} type="video/mp4" />
         </video>
-
-
-
-
         <div className="absolute inset-0 bg-primary/25" />
         <div className="absolute inset-0 bg-gradient-to-b from-primary/40 via-transparent to-primary/60" />
       </motion.div>
+
 
       <div className="relative z-10 container mx-auto px-4 text-center max-w-5xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }} className="mb-6">
