@@ -41,7 +41,7 @@ const Header = () => {
 
   const isHomePage = location.pathname === "/";
   const headerBg = (scrolled || !isHomePage)
-    ? "bg-primary/95 backdrop-blur-xl shadow-luxury py-3"
+    ? "bg-primary/95 shadow-luxury py-3"
     : "bg-transparent py-6";
 
   return (
@@ -124,7 +124,7 @@ const Header = () => {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 8, scale: 0.96 }}
                   transition={{ duration: 0.2 }}
-                  className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-52 bg-primary/95 backdrop-blur-xl rounded-xl border border-secondary/15 shadow-luxury overflow-hidden"
+                  className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-52 bg-primary/95 rounded-xl border border-secondary/15 shadow-luxury overflow-hidden"
                 >
                   {companyDropdownLinks.map((link) => (
                     <Link
@@ -177,7 +177,7 @@ const Header = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="xl:hidden bg-primary/98 backdrop-blur-xl border-t border-secondary/20"
+            className="xl:hidden bg-primary/98 border-t border-secondary/20"
           >
             <nav className="flex flex-col p-6 gap-4">
               {mainNavLinks.map((link) => (

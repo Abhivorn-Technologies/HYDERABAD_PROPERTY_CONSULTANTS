@@ -94,7 +94,7 @@
 
 @layer components {
   .glass-card {
-    @apply bg-card/80 backdrop-blur-xl border border-border/50 shadow-luxury;
+    @apply bg-card/80 border border-border/50 shadow-luxury;
   }
 
   .site-card {
@@ -121,7 +121,7 @@
   }
 
   .investment-card {
-    @apply bg-primary/20 backdrop-blur-md border border-secondary/20 shadow-luxury transition-all duration-500 relative overflow-hidden;
+    @apply bg-primary/20 border border-secondary/20 shadow-luxury transition-all duration-500 relative overflow-hidden;
     border-radius: 20px;
   }
 
@@ -148,15 +148,13 @@
 
   .glass-dark {
     background: hsla(0, 0%, 10%, 0.85);
-    backdrop-filter: blur(20px);
     border: 1px solid hsla(0, 0%, 100%, 0.1);
   }
 
   .gradient-gold-btn {
     position: relative;
     overflow: hidden;
-    background: rgba(10, 10, 10, 0.3);
-    backdrop-filter: blur(16px);
+    background: rgba(10, 10, 10, 0.4);
     border: 1px solid hsl(var(--secondary) / 0.3);
     @apply text-secondary font-bold shadow-luxury transition-all duration-500 cursor-pointer;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -181,7 +179,6 @@
     background: hsl(var(--secondary));
     @apply text-primary shadow-luxury scale-105;
     transform: translateY(-2px);
-    backdrop-filter: blur(0px);
   }
 
   .gradient-gold-btn:hover::after {
@@ -197,8 +194,7 @@
   }
 
   .site-button-outline {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.08);
     @apply border-2 border-secondary/40 text-secondary transition-all duration-300 cursor-pointer;
   }
   

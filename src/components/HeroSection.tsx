@@ -1,7 +1,8 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
-import mainvideo1 from "@/assets/mainvideo1.mp4";
+import heroBg from "@/assets/hero-bg.jpg";
+import main4k from "@/assets/main4k.mp4";
 import { heroContent } from "@/data/content";
 
 
@@ -32,12 +33,13 @@ const HeroSection = () => {
           loop
           playsInline
           preload="auto"
+          poster={heroBg}
           className="w-full h-full object-cover will-change-transform"
         >
-          <source src={mainvideo1} type="video/mp4" />
+          <source src={main4k} type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-primary/25" />
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/25 via-transparent to-primary/35" />
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/35 via-transparent to-primary/45" />
       </motion.div>
 
 

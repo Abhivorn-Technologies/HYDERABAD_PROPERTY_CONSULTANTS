@@ -113,7 +113,7 @@ const ContactSection = () => {
             <form 
               ref={formRef} 
               onSubmit={handleSubmit} 
-              className="bg-primary/35 backdrop-blur-2xl border border-white/10 rounded-2xl sm:rounded-3xl p-5 sm:p-7 md:p-10 space-y-4 md:space-y-6 shadow-2xl mx-auto w-full max-w-xl lg:max-w-none hover:border-white/20 transition-all duration-300 relative overflow-hidden group"
+              className="bg-primary/35 border border-white/10 rounded-2xl sm:rounded-3xl p-5 sm:p-7 md:p-10 space-y-4 md:space-y-6 shadow-2xl mx-auto w-full max-w-xl lg:max-w-none hover:border-white/20 transition-all duration-300 relative overflow-hidden group"
             >
               {/* Added a title back into the card for clarity on mobile */}
               <div className="mb-6">
