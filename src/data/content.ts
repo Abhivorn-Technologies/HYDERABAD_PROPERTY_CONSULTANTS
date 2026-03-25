@@ -28,7 +28,7 @@ export const stats = [
   { value: 1000, suffix: "+", label: "Happy Buyers" },
   { value: 50, suffix: "+", label: "Projects" },
   { value: 20, suffix: "+", label: "Developer Partners" },
-  { value: 10, suffix: "+", label: "Years Experience" },
+  { value: 8, suffix: "+", label: "Years Experience" },
 ];
 
 // ── Services ──

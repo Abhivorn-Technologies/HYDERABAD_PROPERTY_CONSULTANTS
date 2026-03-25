@@ -99,7 +99,7 @@
 
   .site-card {
     background: #FFFFFF;
-    @apply border border-secondary/15 shadow-luxury transition-all duration-500 relative overflow-hidden;
+    @apply border border-secondary/25 shadow-luxury transition-all duration-500 relative overflow-hidden;
     border-radius: 24px;
     box-shadow:
       0 4px 6px -1px rgba(0, 0, 0, 0.02),
@@ -108,7 +108,7 @@
   }
 
   .site-card:hover {
-    @apply border-secondary/30 cursor-pointer;
+    @apply border-secondary/40 cursor-pointer;
     transform: translateY(-8px);
     box-shadow:
       0 10px 20px -5px rgba(0, 0, 0, 0.04),
@@ -121,8 +121,9 @@
   }
 
   .investment-card {
-    @apply bg-primary/20 border border-secondary/20 shadow-luxury transition-all duration-500 relative overflow-hidden;
-    border-radius: 20px;
+    background: linear-gradient(135deg, hsla(210, 30%, 98%, 0.85) 0%, hsla(210, 20%, 95%, 0.92) 100%);
+    @apply backdrop-blur-xl border border-secondary/25 shadow-luxury transition-all duration-500 relative overflow-hidden ring-1 ring-blue-200/20;
+    border-radius: 24px;
   }
 
   .investment-card::before {
@@ -131,19 +132,23 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 3px;
+    height: 4px;
     background: var(--gradient-gold);
-    opacity: 0;
-    transition: opacity 0.4s ease;
+    opacity: 0.1;
+    transition: all 0.5s ease;
   }
 
   .investment-card:hover {
-    @apply border-secondary/50 -translate-y-2 bg-primary/30 cursor-pointer;
-    box-shadow: 0 20px 40px -15px rgba(207, 158, 61, 0.2);
+    @apply -translate-y-2 ring-secondary/30 cursor-pointer;
+    background: linear-gradient(135deg, hsla(210, 30%, 99%, 0.95) 0%, hsla(210, 25%, 97%, 1) 100%);
+    box-shadow: 
+      0 30px 60px -15px rgba(0, 50, 100, 0.1),
+      0 0 40px -10px rgba(207, 158, 61, 0.1);
   }
 
   .investment-card:hover::before {
     opacity: 1;
+    height: 6px;
   }
 
   .glass-dark {
@@ -219,6 +224,10 @@
 
   .shadow-gold {
     box-shadow: var(--shadow-gold);
+  }
+
+  .drop-shadow-glow {
+    filter: drop-shadow(0 0 8px hsl(var(--secondary) / 0.5));
   }
 }
 

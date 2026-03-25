@@ -4,7 +4,7 @@ import { processSteps } from "@/data/content";
 
 const HowWeWork = () => {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { once: true, amount: 0.05 });
 
   return (
     <section id="process" className="section-padding" ref={ref}>

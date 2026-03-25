@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import { Send, Phone, Mail, MapPin, ChevronDown } from "lucide-react";
 import emailjs from "@emailjs/browser";
 import heroBg from "@/assets/hero-bg.jpg";
-import mainvideo3 from "@/assets/mainvideo3.mp4";
+import vid3 from "@/assets/vid3.mp4";
 import { contactInfo } from "@/data/content";
 import { z } from "zod";
 
@@ -21,7 +21,7 @@ type FormData = z.infer<typeof contactSchema>;
 const ContactSection = () => {
   const ref = useRef(null);
   const formRef = useRef<HTMLFormElement>(null);
-  const inView = useInView(ref, { once: false, amount: 0.3, margin: "-100px" });
+  const inView = useInView(ref, { once: true, amount: 0.15, margin: "-40px" });
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
@@ -75,7 +75,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="relative section-padding overflow-hidden" ref={ref}>
+    <section id="contact" className="relative section-padding overflow-hidden bg-cover bg-center" ref={ref} style={{ backgroundImage: `url(${heroBg})` }}>
       <div className="absolute inset-0">
         <video
           autoPlay
@@ -85,9 +85,10 @@ const ContactSection = () => {
           poster={heroBg}
           className="w-full h-full object-cover"
         >
-          <source src={mainvideo3} type="video/mp4" />
+          <source src={vid3} type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-primary/40 md:bg-primary/25" />
+        <div className="absolute inset-0 bg-primary/60 md:bg-primary/50" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-primary/80 via-primary/40 to-transparent" />
       </div>
       <div className="container mx-auto relative z-10">
         <motion.div 
@@ -113,7 +114,7 @@ const ContactSection = () => {
             <form 
               ref={formRef} 
               onSubmit={handleSubmit} 
-              className="bg-primary/35 border border-white/10 rounded-2xl sm:rounded-3xl p-5 sm:p-7 md:p-10 space-y-4 md:space-y-6 shadow-2xl mx-auto w-full max-w-xl lg:max-w-none hover:border-white/20 transition-all duration-300 relative overflow-hidden group"
+              className="bg-primary/80 backdrop-blur-xl border border-white/10 rounded-2xl sm:rounded-3xl p-5 sm:p-7 md:p-10 space-y-4 md:space-y-6 shadow-2xl mx-auto w-full max-w-xl lg:max-w-none hover:border-secondary/30 transition-all duration-300 relative overflow-hidden group ring-1 ring-white/5"
             >
               {/* Added a title back into the card for clarity on mobile */}
               <div className="mb-6">
@@ -125,23 +126,23 @@ const ContactSection = () => {
 
               <div className="grid sm:grid-cols-2 gap-4 md:gap-5">
                 <div>
-                  <input name="name" type="text" placeholder="Your Name" required className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder:text-white/40 focus:outline-none focus:border-secondary transition-all" />
-                  {errors.name && <p className="text-secondary text-xs mt-1">{errors.name}</p>}
+                  <input name="name" type="text" placeholder="Your Name" required className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3.5 text-white placeholder:text-white/60 focus:outline-none focus:border-secondary transition-all backdrop-blur-sm" />
+                  {errors.name && <p className="text-secondary text-xs mt-1 font-bold">{errors.name}</p>}
                 </div>
                 <div>
-                  <input name="phone" type="tel" placeholder="Phone Number" required className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder:text-white/40 focus:outline-none focus:border-secondary transition-all" />
-                  {errors.phone && <p className="text-secondary text-xs mt-1">{errors.phone}</p>}
+                  <input name="phone" type="tel" placeholder="Phone Number" required className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3.5 text-white placeholder:text-white/60 focus:outline-none focus:border-secondary transition-all backdrop-blur-sm" />
+                  {errors.phone && <p className="text-secondary text-xs mt-1 font-bold">{errors.phone}</p>}
                 </div>
               </div>
               
               <div>
-                <input name="email" type="email" placeholder="Email Address" required className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder:text-white/40 focus:outline-none focus:border-secondary transition-all" />
-                {errors.email && <p className="text-secondary text-xs mt-1">{errors.email}</p>}
+                <input name="email" type="email" placeholder="Email Address" required className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3.5 text-white placeholder:text-white/60 focus:outline-none focus:border-secondary transition-all backdrop-blur-sm" />
+                {errors.email && <p className="text-secondary text-xs mt-1 font-bold">{errors.email}</p>}
               </div>
 
               <div className="grid sm:grid-cols-2 gap-4 md:gap-5">
                 <div className="relative group/select">
-                  <select name="budget" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white/70 focus:outline-none focus:border-secondary transition-all appearance-none cursor-pointer">
+                  <select name="budget" className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-secondary transition-all appearance-none cursor-pointer backdrop-blur-sm">
                     <option value="" className="bg-primary text-white">Select Budget</option>
                     <option className="bg-primary text-white">Under ₹50 Lakhs</option>
                     <option className="bg-primary text-white">₹50L - ₹1 Cr</option>
@@ -149,11 +150,11 @@ const ContactSection = () => {
                     <option className="bg-primary text-white">₹2 Cr - ₹5 Cr</option>
                     <option className="bg-primary text-white">Above ₹5 Cr</option>
                   </select>
-                  <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 pointer-events-none group-focus-within/select:text-secondary group-focus-within/select:rotate-180 transition-all" size={16} />
+                  <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-white/60 pointer-events-none group-focus-within/select:text-secondary group-focus-within/select:rotate-180 transition-all" size={16} />
                 </div>
 
                 <div className="relative group/select">
-                  <select name="location" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white/70 focus:outline-none focus:border-secondary transition-all appearance-none cursor-pointer">
+                  <select name="location" className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-secondary transition-all appearance-none cursor-pointer backdrop-blur-sm">
                     <option value="" className="bg-primary text-white">Preferred Location</option>
                     <option className="bg-primary text-white">Financial District</option>
                     <option className="bg-primary text-white">Kokapet</option>
@@ -163,7 +164,7 @@ const ContactSection = () => {
                     <option className="bg-primary text-white">Kollur</option>
                     <option className="bg-primary text-white">Other</option>
                   </select>
-                  <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 pointer-events-none group-focus-within/select:text-secondary group-focus-within/select:rotate-180 transition-all" size={16} />
+                  <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-white/60 pointer-events-none group-focus-within/select:text-secondary group-focus-within/select:rotate-180 transition-all" size={16} />
                 </div>
               </div>
 
@@ -171,7 +172,7 @@ const ContactSection = () => {
                 name="message" 
                 placeholder="What are you looking for?" 
                 rows={3} 
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder:text-white/40 focus:outline-none focus:border-secondary transition-all resize-none text-sm md:text-base" 
+                className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3.5 text-white placeholder:text-white/60 focus:outline-none focus:border-secondary transition-all resize-none text-sm md:text-base backdrop-blur-sm" 
               />
 
               <button 
@@ -206,34 +207,34 @@ const ContactSection = () => {
               </p>
             </div>
             
-            <div className="grid sm:grid-cols-3 lg:grid-cols-1 gap-6 md:gap-8">
+            <div className="grid sm:grid-cols-3 lg:grid-cols-1 gap-6 md:gap-8 bg-black/30 backdrop-blur-md p-10 rounded-3xl border border-white/5 ring-1 ring-white/10">
               <div className="flex flex-col lg:flex-row items-center gap-4 group">
-                <div className="w-12 h-12 rounded-2xl bg-secondary/10 flex items-center justify-center shrink-0 border border-secondary/20 group-hover:bg-secondary/20 transition-all">
+                <div className="w-12 h-12 rounded-2xl bg-secondary/20 flex items-center justify-center shrink-0 border border-secondary/30 group-hover:bg-secondary/30 transition-all">
                   <MapPin className="text-secondary" size={20} />
                 </div>
                 <div className="lg:text-left">
-                  <p className="text-white/40 text-[10px] uppercase tracking-tighter mb-1 font-bold">Location</p>
-                  <p className="text-white text-sm font-medium">{contactInfo.location}</p>
+                  <p className="text-secondary text-[10px] uppercase tracking-widest mb-1 font-black">Location</p>
+                  <p className="text-white text-base font-bold drop-shadow-md">{contactInfo.location}</p>
                 </div>
               </div>
               
               <div className="flex flex-col lg:flex-row items-center gap-4 group">
-                <div className="w-12 h-12 rounded-2xl bg-secondary/10 flex items-center justify-center shrink-0 border border-secondary/20 group-hover:bg-secondary/20 transition-all">
+                <div className="w-12 h-12 rounded-2xl bg-secondary/20 flex items-center justify-center shrink-0 border border-secondary/30 group-hover:bg-secondary/30 transition-all">
                   <Phone className="text-secondary" size={20} />
                 </div>
                 <div className="lg:text-left">
-                  <p className="text-white/40 text-[10px] uppercase tracking-tighter mb-1 font-bold">Direct Call</p>
-                  <a href={`tel:${contactInfo.phone}`} className="text-white text-sm font-medium hover:text-secondary transition-colors">{contactInfo.phone}</a>
+                  <p className="text-secondary text-[10px] uppercase tracking-widest mb-1 font-black">Direct Call</p>
+                  <a href={`tel:${contactInfo.phone}`} className="text-white text-base font-bold hover:text-secondary transition-colors drop-shadow-md">{contactInfo.phone}</a>
                 </div>
               </div>
               
               <div className="flex flex-col lg:flex-row items-center gap-4 group overflow-hidden">
-                <div className="w-12 h-12 rounded-2xl bg-secondary/10 flex items-center justify-center shrink-0 border border-secondary/20 group-hover:bg-secondary/20 transition-all">
+                <div className="w-12 h-12 rounded-2xl bg-secondary/20 flex items-center justify-center shrink-0 border border-secondary/30 group-hover:bg-secondary/30 transition-all">
                   <Mail className="text-secondary" size={20} />
                 </div>
                 <div className="lg:text-left max-w-full overflow-hidden">
-                  <p className="text-white/40 text-[10px] uppercase tracking-tighter mb-1 font-bold">Email Us</p>
-                  <a href={`mailto:${contactInfo.email}`} className="text-white text-[13px] font-medium hover:text-secondary transition-colors break-all whitespace-normal">
+                  <p className="text-secondary text-[10px] uppercase tracking-widest mb-1 font-black">Email Us</p>
+                  <a href={`mailto:${contactInfo.email}`} className="text-white text-sm font-bold hover:text-secondary transition-colors break-all whitespace-normal drop-shadow-md">
                     {contactInfo.email}
                   </a>
                 </div>

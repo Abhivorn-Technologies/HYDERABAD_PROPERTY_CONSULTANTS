@@ -13,7 +13,7 @@ const TestimonialsSection = lazy(() => import("@/components/TestimonialsSection"
 const FAQSection = lazy(() => import("@/components/FAQSection"));
 const ContactSection = lazy(() => import("@/components/ContactSection"));
 
-const SectionPlaceholder = () => <div className="min-h-[400px] w-full" />;
+const SectionPlaceholder = () => <div className="min-h-[600px] w-full" />;
 
 const Index = () => {
   return (

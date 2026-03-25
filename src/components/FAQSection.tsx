@@ -5,7 +5,7 @@ import { faqs } from "@/data/content";
 
 const FAQSection = () => {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { once: true, amount: 0.1 });
   const [open, setOpen] = useState<number | null>(0);
 
   return (
