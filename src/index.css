@@ -155,10 +155,11 @@
   .gradient-gold-btn {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(135deg, #CF9E3D 0%, #EFC967 50%, #CF9E3D 100%);
-    background-size: 200% auto;
-    @apply text-primary font-bold shadow-gold transition-all duration-500 cursor-pointer;
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+    background: rgba(10, 10, 10, 0.3);
+    backdrop-filter: blur(16px);
+    border: 1px solid hsl(var(--secondary) / 0.3);
+    @apply text-secondary font-bold shadow-luxury transition-all duration-500 cursor-pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 
   .gradient-gold-btn::after {
@@ -177,9 +178,10 @@
   }
 
   .gradient-gold-btn:hover {
-    background-position: right center;
-    @apply shadow-lg scale-105;
+    background: hsl(var(--secondary));
+    @apply text-primary shadow-luxury scale-105;
     transform: translateY(-2px);
+    backdrop-filter: blur(0px);
   }
 
   .gradient-gold-btn:hover::after {
@@ -195,11 +197,13 @@
   }
 
   .site-button-outline {
-    @apply border-2 border-secondary/50 text-secondary transition-all duration-300 cursor-pointer;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    @apply border-2 border-secondary/40 text-secondary transition-all duration-300 cursor-pointer;
   }
-
+  
   .site-button-outline:hover {
-    @apply border-secondary bg-secondary/5 shadow-luxury scale-105;
+    @apply border-secondary bg-secondary/10 shadow-luxury scale-105;
     transform: translateY(-2px);
   }
 

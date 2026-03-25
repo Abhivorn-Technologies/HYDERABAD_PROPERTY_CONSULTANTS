@@ -30,7 +30,7 @@ const Counter = ({ target, suffix }: { target: number; suffix: string }) => {
 
 const AboutSection = () => {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { once: false, amount: 0.25, margin: "-150px" });
 
   return (
     <section id="about" className="section-padding" ref={ref}>

@@ -4,6 +4,9 @@ import { MapPin, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
+import project1 from "@/assets/project-1.jpg";
+import project2 from "@/assets/project-2.jpg";
+import project3 from "@/assets/project-3.jpg";
 import projectGrandOaks from "@/assets/project-grand-oaks.png";
 import projectBhoojaVillas from "@/assets/project-bhooja-villas.png";
 import projectAparnaSarovar from "@/assets/project-aparna-sarovar.png";
@@ -12,11 +15,14 @@ import projectRajapushpaAtria from "@/assets/project-rajapushpa-atria.png";
 import { projects } from "@/data/content";
 
 const imageMap: Record<string, string> = {
-  "grand-oaks": projectGrandOaks,
-  "bhooja-villas": projectBhoojaVillas,
-  "aparna-sarovar": projectAparnaSarovar,
-  "phoenix-one": projectPhoenixOne,
-  "rajapushpa-atria": projectRajapushpaAtria,
+  "prestige-golden-grove": project1,
+  "rajapushpa-sierra": project2,
+  "brigade-gateway": project3,
+  "prestige-clairemont": projectGrandOaks,
+  "rajapushpa-skyra": projectPhoenixOne,
+  "lansum-elena": projectBhoojaVillas,
+  "lansum-encanto": projectAparnaSarovar,
+  "rajapushpa-provincia": projectRajapushpaAtria,
 };
 
 const FeaturedProjects = () => {

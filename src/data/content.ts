@@ -43,11 +43,14 @@ export const services = [
 
 // ── Projects ──
 export const projects = [
-  { image: "grand-oaks", name: "Prestige Grand Oaks", location: "Financial District", type: "Luxury Apartments", price: "₹1.2 Cr onwards" },
-  { image: "bhooja-villas", name: "My Home Bhooja", location: "Kokapet", type: "Premium Villas", price: "₹2.5 Cr onwards" },
-  { image: "aparna-sarovar", name: "Aparna Sarovar", location: "Nallagandla", type: "Gated Community", price: "₹85 L onwards" },
-  { image: "phoenix-one", name: "Phoenix One Hyderabad", location: "Narsingi", type: "Ultra Luxury", price: "₹3.5 Cr onwards" },
-  { image: "rajapushpa-atria", name: "Rajapushpa Atria", location: "Kokapet", type: "Premium Apartments", price: "₹1.8 Cr onwards" },
+  { image: "prestige-golden-grove", name: "Prestige Golden Grove", location: "Tellapur", type: "Premium Living", price: "₹1.1 Cr onwards" },
+  { image: "rajapushpa-sierra", name: "Rajapushpa Sierra", location: "Tellapur", type: "Luxury Home", price: "₹1.2 Cr onwards" },
+  { image: "brigade-gateway", name: "Brigade Gateway", location: "Neopolis", type: "Elite Residency", price: "₹6 Cr onwards" },
+  { image: "prestige-clairemont", name: "Prestige Clairemont", location: "Neopolis", type: "Signature Suites", price: "₹3 Cr onwards" },
+  { image: "rajapushpa-skyra", name: "Rajapushpa Skyra", location: "Neopolis", type: "Sky-High Luxury", price: "₹3.5 Cr onwards" },
+  { image: "lansum-elena", name: "Lansum Elena", location: "Kokapet", type: "Nature-Inspired", price: "₹3 Cr onwards" },
+  { image: "lansum-encanto", name: "Lansum Encanto", location: "Puppalaguda", type: "Luxury Living", price: "₹4.5 Cr onwards" },
+  { image: "rajapushpa-provincia", name: "Rajapushpa Provincia", location: "Narsingi", type: "Eco-Friendly Homes", price: "₹1.5 Cr onwards" },
 ];
 
 // ── Why Choose Us ──
@@ -118,6 +121,7 @@ export const mainNavLinks = [
 
 export const companyDropdownLinks = [
   { label: "About Us", href: "/about" },
+  { label: "Leadership", href: "/about#directors" },
   { label: "Why Choose Us", href: "/why-us" },
   { label: "Process", href: "/process" },
   { label: "Testimonials", href: "/testimonials" },

@@ -2,12 +2,12 @@ import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { TrendingUp, Star, MapPin } from "lucide-react";
 import investmentBg from "@/assets/investment-bg.jpg";
-import heroVideo from "@/assets/hero-page-video.mp4";
+import mainvideo2 from "@/assets/mainvideo2.mp4";
 import { investmentAreas } from "@/data/content";
 
 const InvestmentSection = () => {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { once: false, amount: 0.3, margin: "-100px" });
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -28,11 +28,11 @@ const InvestmentSection = () => {
             poster={investmentBg}
             className="w-full h-full object-cover scale-110"
           >
-            <source src={heroVideo} type="video/mp4" />
+            <source src={mainvideo2} type="video/mp4" />
           </video>
         </motion.div>
-        <div className="absolute inset-0 bg-primary/35  " />
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/30 via-transparent to-primary/40" />
+        <div className="absolute inset-0 bg-primary/25" />
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/25 via-transparent to-primary/35" />
       </div>
       <div className="container mx-auto relative z-10">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} className="text-center mb-16">
