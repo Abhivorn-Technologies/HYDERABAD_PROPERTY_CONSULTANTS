@@ -48,11 +48,18 @@ const HeroSection = () => {
           </span>
         </motion.div>
 
-        <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="text-4xl md:text-5xl lg:text-7xl font-heading font-bold text-white leading-tight mb-6 drop-shadow-2xl">
+        <motion.h1 
+          initial={{ opacity: 0, y: 30 }} 
+          animate={{ opacity: 1, y: 0 }} 
+          transition={{ duration: 0.7, delay: 0.2 }} 
+          className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-white leading-tight mb-6 drop-shadow-2xl"
+        >
           {heroContent.heading}{" "}
           <span className="text-gradient-gold">{heroContent.highlight}</span>
-          <br />
-          <span className="text-3xl md:text-4xl lg:text-5xl font-light italic text-white/90">{heroContent.subheading}</span>
+          <br className="hidden sm:block" />
+          <span className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-light italic text-white/90 block sm:inline mt-2 sm:mt-0">
+            {heroContent.subheading}
+          </span>
         </motion.h1>
 
         <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }} className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto mb-10 font-light leading-relaxed drop-shadow-md">
