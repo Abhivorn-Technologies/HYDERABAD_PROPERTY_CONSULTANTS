@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import { Send, Phone, Mail, MapPin } from "lucide-react";
 import emailjs from "@emailjs/browser";
 import heroBg from "@/assets/hero-bg.jpg";
-import video3 from "@/assets/video-3.mp4";
+import mainvideo3 from "@/assets/mainvideo3.mp4";
 import { contactInfo } from "@/data/content";
 import { z } from "zod";
 
@@ -21,7 +21,7 @@ type FormData = z.infer<typeof contactSchema>;
 const ContactSection = () => {
   const ref = useRef(null);
   const formRef = useRef<HTMLFormElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { once: false, amount: 0.3, margin: "-100px" });
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
@@ -85,9 +85,9 @@ const ContactSection = () => {
           poster={heroBg}
           className="w-full h-full object-cover"
         >
-          <source src={video3} type="video/mp4" />
+          <source src={mainvideo3} type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-primary/40 backdrop-blur-[1.5px]" />
+        <div className="absolute inset-0 bg-primary/40" />
       </div>
       <div className="container mx-auto relative z-10">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} className="text-center mb-16">
@@ -98,7 +98,7 @@ const ContactSection = () => {
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
-          <motion.div initial={{ opacity: 0, x: -30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6, delay: 0.2 }}>
+          <motion.div initial={{ opacity: 0, x: -80 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}>
             <form ref={formRef} onSubmit={handleSubmit} className="bg-primary/30 backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 space-y-4 md:space-y-5 shadow-2xl mx-auto max-w-md lg:max-w-none">
               <div className="grid sm:grid-cols-2 gap-5">
                 <div>
@@ -141,7 +141,7 @@ const ContactSection = () => {
             </form>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, x: 30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6, delay: 0.4 }} className="flex flex-col justify-center space-y-8 text-center lg:text-left">
+          <motion.div initial={{ opacity: 0, x: 80 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }} className="flex flex-col justify-center space-y-8 text-center lg:text-left">
             <div>
               <h3 className="text-2xl font-heading font-bold text-white mb-4 drop-shadow-md">Let's Find Your Perfect Property</h3>
               <p className="text-white/80 leading-relaxed max-w-lg mx-auto lg:mx-0">Our experts are ready to help you discover the best real estate opportunities in Hyderabad. Get personalized guidance — absolutely free.</p>

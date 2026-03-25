@@ -1,29 +1,57 @@
 import HeroSection from "@/components/HeroSection";
-import AboutSection from "@/components/AboutSection";
-import ServicesSection from "@/components/ServicesSection";
-import FeaturedProjects from "@/components/FeaturedProjects";
-import WhyChooseUs from "@/components/WhyChooseUs";
-import InvestmentSection from "@/components/InvestmentSection";
-import HowWeWork from "@/components/HowWeWork";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import FAQSection from "@/components/FAQSection";
-import ContactSection from "@/components/ContactSection";
+import { Suspense, lazy } from "react";
+
+// Lazy load sections that are below the fold
+const AboutSection = lazy(() => import("@/components/AboutSection"));
+const ServicesSection = lazy(() => import("@/components/ServicesSection"));
+const FeaturedProjects = lazy(() => import("@/components/FeaturedProjects"));
+const WhyChooseUs = lazy(() => import("@/components/WhyChooseUs"));
+const InvestmentSection = lazy(() => import("@/components/InvestmentSection"));
+const DirectorsSection = lazy(() => import("@/components/DirectorsSection"));
+const HowWeWork = lazy(() => import("@/components/HowWeWork"));
+const TestimonialsSection = lazy(() => import("@/components/TestimonialsSection"));
+const FAQSection = lazy(() => import("@/components/FAQSection"));
+const ContactSection = lazy(() => import("@/components/ContactSection"));
+
+const SectionPlaceholder = () => <div className="min-h-[400px] w-full" />;
 
 const Index = () => {
   return (
     <>
       <HeroSection />
-      <AboutSection />
-      <ServicesSection />
-      <FeaturedProjects />
-      <WhyChooseUs />
-      <InvestmentSection />
-      <HowWeWork />
-      <TestimonialsSection />
-      <FAQSection />
-      <ContactSection />
+      <Suspense fallback={<SectionPlaceholder />}>
+        <AboutSection />
+      </Suspense>
+      <Suspense fallback={<SectionPlaceholder />}>
+        <ServicesSection />
+      </Suspense>
+      <Suspense fallback={<SectionPlaceholder />}>
+        <FeaturedProjects />
+      </Suspense>
+      <Suspense fallback={<SectionPlaceholder />}>
+        <WhyChooseUs />
+      </Suspense>
+      <Suspense fallback={<SectionPlaceholder />}>
+        <DirectorsSection />
+      </Suspense>
+      <Suspense fallback={<SectionPlaceholder />}>
+        <InvestmentSection />
+      </Suspense>
+      <Suspense fallback={<SectionPlaceholder />}>
+        <HowWeWork />
+      </Suspense>
+      <Suspense fallback={<SectionPlaceholder />}>
+        <TestimonialsSection />
+      </Suspense>
+      <Suspense fallback={<SectionPlaceholder />}>
+        <FAQSection />
+      </Suspense>
+      <Suspense fallback={<SectionPlaceholder />}>
+        <ContactSection />
+      </Suspense>
     </>
   );
 };
 
 export default Index;
+

@@ -39,15 +39,17 @@ const Header = () => {
   const isActive = (href: string) => location.pathname === href;
   const isCompanyActive = companyDropdownLinks.some((link) => isActive(link.href));
 
+  const isHomePage = location.pathname === "/";
+  const headerBg = (scrolled || !isHomePage)
+    ? "bg-primary/95 backdrop-blur-xl shadow-luxury py-3"
+    : "bg-transparent py-6";
+
   return (
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
-        ? "bg-primary/90 backdrop-blur-xl shadow-luxury py-3 border-b border-white/10"
-        : "bg-transparent py-6"
-        }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${headerBg}`}
     >
       <div className="container mx-auto flex items-center justify-between px-4">
         {/* Logo */}
@@ -55,7 +57,7 @@ const Header = () => {
           <img
             src={logo}
             alt="Hyderabad Property Consultants"
-            className={`w-auto transition-all duration-500 ${scrolled ? "h-10 md:h-12" : "h-12 md:h-14"}`}
+            className={`w-auto transition-all duration-500 ${(scrolled || !isHomePage) ? "h-14 md:h-16" : "h-20 md:h-24"}`}
           />
         </Link>
 
@@ -65,9 +67,9 @@ const Header = () => {
             <Link
               key={link.href}
               to={link.href}
-              className={`text-sm font-semibold transition-all duration-300 relative py-1 px-1 group ${isActive(link.href)
+              className={`text-sm font-semibold transition-all duration-300 relative py-1 px-1 group drop-shadow-sm ${isActive(link.href)
                 ? "text-secondary"
-                : "text-primary-foreground/80 hover:text-secondary"
+                : "text-white/90 hover:text-secondary"
                 }`}
             >
               {link.label}
@@ -92,7 +94,7 @@ const Header = () => {
           <div ref={dropdownRef} className="relative">
             <button
               onClick={() => setCompanyOpen(!companyOpen)}
-              className={`flex items-center gap-1 text-sm font-semibold transition-all duration-300 relative py-1 px-1 group ${isCompanyActive ? "text-secondary" : "text-primary-foreground/80 hover:text-secondary"
+              className={`flex items-center gap-1 text-sm font-semibold transition-all duration-300 relative py-1 px-1 group drop-shadow-sm ${isCompanyActive ? "text-secondary" : "text-white/90 hover:text-secondary"
                 }`}
             >
               Company
@@ -146,7 +148,7 @@ const Header = () => {
         <div className="hidden md:flex items-center gap-4">
           <a
             href={`tel:${contactInfo.phone.replace(/\s+/g, "")}`}
-            className="flex items-center gap-2 text-primary-foreground/80 hover:text-secondary transition-colors text-sm"
+            className="flex items-center gap-2 text-white/90 hover:text-secondary transition-all text-sm drop-shadow-sm"
           >
             <Phone size={16} />
             <span>{contactInfo.phone}</span>
