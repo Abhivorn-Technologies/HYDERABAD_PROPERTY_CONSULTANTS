@@ -27,7 +27,7 @@ const imageMap: Record<string, string> = {
 
 const FeaturedProjects = () => {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { once: true, amount: 0.05 });
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {

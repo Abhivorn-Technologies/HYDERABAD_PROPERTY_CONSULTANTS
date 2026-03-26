@@ -7,7 +7,7 @@ export const directors = [
     id: 0,
     name: "Oruganti Ravindra",
     role: "Managing Director",
-    desc: "A visionary leader with over 15 years of experience in the Hyderabad real estate market, dedicated to providing transparent and expert property consulting.",
+    desc: "A visionary leader with over 8 years of experience in the Hyderabad real estate market, dedicated to providing transparent and expert property consulting.",
   },
   {
     id: 1,
@@ -50,7 +50,7 @@ const DirectorsSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.2, margin: "-50px" }}
           transition={{ duration: 0.6 }}
           className="text-center mb-20"
         >
@@ -67,7 +67,7 @@ const DirectorsSection = () => {
           {/* Navigation Buttons */}
           <button 
             onClick={prevDirector}
-            className="absolute left-0 md:-left-12 z-30 w-12 h-12 rounded-full bg-white border border-secondary/20 flex items-center justify-center text-secondary hover:bg-secondary hover:text-white transition-all shadow-lg"
+            className="absolute -left-1 md:-left-16 top-1/2 -translate-y-1/2 z-40 w-11 h-11 md:w-12 md:h-12 rounded-full bg-white border-2 border-secondary/40 flex items-center justify-center text-secondary hover:bg-secondary hover:text-white transition-all shadow-lg"
           >
             <ChevronLeft size={24} />
           </button>
@@ -89,8 +89,8 @@ const DirectorsSection = () => {
                   }}
                   transition={{ type: "spring", stiffness: 300, damping: 30 }}
                   onClick={() => setActiveIndex(i)}
-                  className={`absolute w-full max-w-[350px] cursor-pointer group rounded-3xl overflow-hidden text-center p-8 bg-white border ${
-                    isMiddle ? "border-secondary/40 shadow-gold" : "border-secondary/10"
+                  className={`absolute w-full max-w-[320px] md:max-w-[350px] cursor-pointer group rounded-3xl overflow-hidden text-center p-6 md:p-8 bg-white border-2 ${
+                    isMiddle ? "border-secondary/60 shadow-gold" : "border-secondary/20"
                   } transition-all duration-500 shadow-luxury`}
                   style={{ pointerEvents: isMiddle ? "auto" : "auto" }}
                 >
@@ -98,30 +98,30 @@ const DirectorsSection = () => {
                     <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-transparent via-secondary to-transparent" />
                   )}
                   
-                  <div className={`relative w-28 h-28 mx-auto mb-6 rounded-full flex items-center justify-center transition-all duration-500 overflow-hidden border-2 ${
+                  <div className={`relative w-24 h-24 md:w-28 md:h-28 mx-auto mb-6 rounded-full flex items-center justify-center transition-all duration-500 overflow-hidden border-2 ${
                     isMiddle ? "bg-secondary/10 text-secondary border-secondary/30 scale-110" : "bg-secondary/5 text-secondary/60 border-secondary/10"
                   }`}>
-                    <User size={40} />
+                    <User size={36} />
                   </div>
                   
-                  <h3 className={`text-xl md:text-2xl font-heading font-bold mb-1 transition-colors duration-300 ${
+                  <h3 className={`text-lg md:text-2xl font-heading font-bold mb-1 transition-colors duration-300 ${
                     isMiddle ? "text-foreground" : "text-foreground/70"
                   }`}>
                     {director.name}
                   </h3>
                   
-                  <p className={`font-semibold text-xs md:text-sm uppercase tracking-[0.2em] mb-4 ${
+                  <p className={`font-semibold text-[10px] md:text-sm uppercase tracking-[0.2em] mb-4 ${
                     isMiddle ? "text-secondary" : "text-secondary/60"
                   }`}>
                     {director.role}
                   </p>
                   
                   <div className={`h-0.5 mx-auto mb-6 transition-all duration-500 rounded-full ${
-                    isMiddle ? "w-20 bg-secondary/40" : "w-12 bg-secondary/20"
+                    isMiddle ? "w-16 md:w-20 bg-secondary/40" : "w-10 md:w-12 bg-secondary/20"
                   }`} />
                   
-                  <p className={`text-sm leading-relaxed mb-8 font-medium italic transition-all duration-500 ${
-                    isMiddle ? "text-muted-foreground opacity-100" : "text-muted-foreground/40 line-clamp-2 md:line-clamp-none"
+                  <p className={`text-xs md:text-sm leading-relaxed mb-6 md:mb-8 font-medium italic transition-all duration-500 ${
+                    isMiddle ? "text-muted-foreground opacity-100" : "text-muted-foreground/40 line-clamp-2"
                   }`}>
                     "{director.desc}"
                   </p>
@@ -132,11 +132,11 @@ const DirectorsSection = () => {
                       animate={{ opacity: 1 }}
                       className="flex justify-center gap-4"
                     >
-                      <a href="#" className="w-10 h-10 rounded-full bg-secondary/5 flex items-center justify-center text-secondary border border-secondary/10 hover:bg-secondary hover:text-white transition-all duration-300">
-                        <Linkedin size={18} />
+                      <a href="#" className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-secondary/5 flex items-center justify-center text-secondary border border-secondary/10 hover:bg-secondary hover:text-white transition-all duration-300">
+                        <Linkedin size={16} />
                       </a>
-                      <a href={`mailto:ravindra@hyderabadpropertyconsultants.com`} className="w-10 h-10 rounded-full bg-secondary/5 flex items-center justify-center text-secondary border border-secondary/10 hover:bg-secondary hover:text-white transition-all duration-300">
-                        <Mail size={18} />
+                      <a href={`mailto:ravindra@hyderabadpropertyconsultants.com`} className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-secondary/5 flex items-center justify-center text-secondary border border-secondary/10 hover:bg-secondary hover:text-white transition-all duration-300">
+                        <Mail size={16} />
                       </a>
                     </motion.div>
                   )}
@@ -147,7 +147,7 @@ const DirectorsSection = () => {
 
           <button 
             onClick={nextDirector}
-            className="absolute right-0 md:-right-12 z-30 w-12 h-12 rounded-full bg-white border border-secondary/20 flex items-center justify-center text-secondary hover:bg-secondary hover:text-white transition-all shadow-lg"
+            className="absolute -right-1 md:-right-16 top-1/2 -translate-y-1/2 z-40 w-11 h-11 md:w-12 md:h-12 rounded-full bg-white border-2 border-secondary/40 flex items-center justify-center text-secondary hover:bg-secondary hover:text-white transition-all shadow-lg"
           >
             <ChevronRight size={24} />
           </button>
