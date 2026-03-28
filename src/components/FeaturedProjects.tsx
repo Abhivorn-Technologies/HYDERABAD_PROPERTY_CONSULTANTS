@@ -34,9 +34,6 @@ const FeaturedProjects = () => {
       loop: true,
       align: "start",
       slidesToScroll: 1,
-      breakpoints: {
-        "(min-width: 768px)": { slidesToScroll: 1 }
-      }
     },
     [Autoplay({ delay: 4000, stopOnInteraction: false })]
   );
@@ -65,27 +62,30 @@ const FeaturedProjects = () => {
               {projects.map((project, i) => (
                 <div
                   key={i}
-                  className="flex-[0_0_100%] min-w-0 sm:flex-[0_0_50%] lg:flex-[0_0_33.33%] px-3"
+                  className="flex-[0_0_100%] min-w-0 sm:flex-[0_0_50%] lg:flex-[0_0_33.33%] xl:flex-[0_0_25%] px-3"
                 >
                   <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={inView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.5, delay: i * 0.1 }}
-                    className="group site-card rounded-2xl overflow-hidden hover:-translate-y-2 transition-all duration-500 h-full cursor-pointer"
+                    className="group site-card rounded-2xl overflow-hidden hover:-translate-y-2 transition-all duration-500 h-full cursor-pointer flex flex-col"
                   >
-                    <div className="relative overflow-hidden h-56">
+                    <div className="relative overflow-hidden h-52 sm:h-56">
                       <img src={imageMap[project.image]} alt={project.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
-                      <div className="absolute top-4 left-4">
+                      <div className="absolute top-4 left-4 flex gap-2 items-center">
+                        <div className="w-8 h-8 rounded-full gradient-gold-btn flex items-center justify-center text-xs font-bold shadow-lg">
+                          {String(i + 1).padStart(2, '0')}
+                        </div>
                         <span className="bg-primary/60 backdrop-blur-md text-secondary border border-secondary/30 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">{project.type}</span>
                       </div>
                     </div>
-                    <div className="p-6">
-                      <h3 className="text-lg font-heading font-bold text-foreground mb-2">{project.name}</h3>
-                      <div className="flex items-center gap-1 text-muted-foreground text-sm mb-3">
-                        <MapPin size={14} />
+                    <div className="p-6 flex flex-col flex-grow">
+                      <h3 className="text-lg font-heading font-bold text-foreground mb-2 group-hover:text-secondary transition-colors line-clamp-2">{project.name}</h3>
+                      <div className="flex items-center gap-1 text-muted-foreground text-sm mb-4">
+                        <MapPin size={14} className="text-secondary" />
                         <span>{project.location}</span>
                       </div>
-                      <div className="flex items-center justify-between">
+                      <div className="mt-auto flex items-center justify-between pt-4 border-t border-border/50">
                         <span className="text-secondary font-bold text-lg">{project.price}</span>
                         <Link to="/contact" className="flex items-center gap-1 text-primary hover:text-secondary transition-colors text-sm font-medium">
                           Enquire <ArrowRight size={14} />
