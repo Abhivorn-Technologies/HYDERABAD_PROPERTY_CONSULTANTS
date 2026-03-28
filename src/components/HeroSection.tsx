@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
 import heroBg from "@/assets/hero-bg.jpg";
-import vid2 from "@/assets/vid2.mp4";
+import hydDrone1 from "@/assets/hyd-drone1.mp4";
 import { heroContent } from "@/data/content";
 
 
@@ -37,16 +37,16 @@ const HeroSection = () => {
           poster={heroBg}
           className="w-full h-full object-cover will-change-transform"
         >
-          <source src={vid2} type="video/mp4" />
+          <source src={hydDrone1} type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-primary/25" />
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/35 via-transparent to-primary/45" />
+        <div className="absolute inset-0 bg-primary/40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/50 via-transparent to-primary/60" />
       </motion.div>
 
 
       <div className="relative z-10 container mx-auto px-4 text-center max-w-5xl pt-28 md:pt-20">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }} className="mb-6">
-          <span className="inline-block px-4 py-1.5 rounded-full border border-secondary/40 text-secondary text-sm font-medium tracking-wider uppercase">
+          <span className="inline-block px-5 py-2 rounded-full border border-secondary/60 text-secondary text-xs sm:text-sm font-bold tracking-[0.15em] uppercase bg-black/20 backdrop-blur-sm shadow-xl">
             {heroContent.badge}
           </span>
         </motion.div>
