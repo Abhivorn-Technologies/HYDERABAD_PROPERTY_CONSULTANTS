@@ -19,12 +19,31 @@ const FAQPage = lazy(() => import("./pages/FAQPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
 const WhyUsPage = lazy(() => import("./pages/WhyUsPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+import logo from "@/assets/logo.png";
 
 const queryClient = new QueryClient();
 
-const PageLoader = () => (
-  <div className="flex items-center justify-center min-h-[60vh]">
-    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+// A safe fallback component that perfectly copies the luxury design of Preloader
+// but strictly removes Framer-Motion AnimatePresence to prevent React from crashing
+// ("Failed to execute removeChild on Node") when Suspense forcefully unmounts it.
+const SuspenseLoader = () => (
+  <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#0d0d0d] overflow-hidden">
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(207,158,61,0.1),transparent_70%)]" />
+    <div className="relative flex flex-col items-center">
+      <div className="mb-8">
+        <img 
+          src={logo} 
+          alt="Loading..." 
+          className="h-24 md:h-32 w-auto drop-shadow-[0_0_25px_rgba(207,158,61,0.4)]" 
+        />
+      </div>
+      <div className="w-56 h-[1px] bg-white/5 rounded-full overflow-hidden relative">
+        <div className="absolute inset-0 bg-gradient-to-r from-secondary/20 via-secondary to-secondary/20 animate-pulse" />
+      </div>
+      <p className="mt-6 text-secondary/70 text-[10px] uppercase tracking-[0.5em] font-medium animate-pulse">
+        Elevating Lifestyle
+      </p>
+    </div>
   </div>
 );
 
@@ -35,7 +54,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <ScrollToTop />
-        <Suspense fallback={<PageLoader />}>
+        <Suspense fallback={<SuspenseLoader />}>
           <Routes>
             <Route element={<MainLayout />}>
               <Route path="/" element={<Index />} />
