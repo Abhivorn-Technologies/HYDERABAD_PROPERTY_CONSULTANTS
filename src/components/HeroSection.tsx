@@ -1,17 +1,26 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import heroBg from "@/assets/hero-bg.jpg";
 import hydDrone1 from "@/assets/main-video.mp4";
 import { heroContent } from "@/data/content";
 
 
 const HeroSection = () => {
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const containerRef = useRef(null);
+  
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
   });
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const videoY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   // Keep scale at 1 to prevent blurring/pixelation from artificial zoom
@@ -22,21 +31,25 @@ const HeroSection = () => {
     <section
       id="home"
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-primary bg-cover bg-center"
-      style={{ backgroundImage: `url(${heroBg})` }}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#05080a]"
     >
       <motion.div 
-        style={{ y: videoY, scale: videoScale, opacity }} 
-        className="absolute inset-0 bg-primary"
+        style={isMobile ? {} : { y: videoY, scale: videoScale, opacity }} 
+        className="absolute inset-0 bg-[#05080a]"
       >
+        {/* Elegant Loading Spinner shown until video is ready */}
+        <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-700 ${isVideoLoaded ? "opacity-0 invisible" : "opacity-100"}`}>
+          <div className="w-12 h-12 border-4 border-secondary/20 border-t-secondary rounded-full animate-spin"></div>
+        </div>
+
         <video
           autoPlay
           muted
           loop
           playsInline
           preload="auto"
-          poster={heroBg}
-          className="w-full h-full object-cover will-change-transform"
+          onLoadedData={() => setIsVideoLoaded(true)}
+          className={`w-full h-full object-cover will-change-transform transition-opacity duration-1000 ease-in-out ${isVideoLoaded ? "opacity-100" : "opacity-0"}`}
         >
           <source src={hydDrone1} type="video/mp4" />
         </video>

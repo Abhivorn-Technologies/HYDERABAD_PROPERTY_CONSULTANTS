@@ -9,7 +9,7 @@ const BookingModal = lazy(() => import("@/components/BookingModal"));
 
 const MainLayout = () => {
   return (
-    <div className="min-h-screen bg-gradient-site">
+    <div className="min-h-screen w-full overflow-x-hidden bg-gradient-site">
       <Preloader />
       <Header />
       <Outlet />
