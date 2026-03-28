@@ -10,6 +10,13 @@ const HeroSection = () => {
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const containerRef = useRef(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current && videoRef.current.readyState >= 3) {
+      setIsVideoLoaded(true);
+    }
+  }, []);
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -43,13 +50,17 @@ const HeroSection = () => {
         </div>
 
         <video
+          ref={videoRef}
           autoPlay
           muted
           loop
           playsInline
+          webkit-playsinline="true"
+          x5-playsinline="true"
+          disablePictureInPicture
           preload="auto"
           onLoadedData={() => setIsVideoLoaded(true)}
-          className={`w-full h-full object-cover will-change-transform transition-opacity duration-1000 ease-in-out ${isVideoLoaded ? "opacity-100" : "opacity-0"}`}
+          className={`w-full h-full object-cover pointer-events-none transition-opacity duration-1000 ease-in-out ${isVideoLoaded ? "opacity-100" : "opacity-0"}`}
         >
           <source src={hydDrone1} type="video/mp4" />
         </video>
