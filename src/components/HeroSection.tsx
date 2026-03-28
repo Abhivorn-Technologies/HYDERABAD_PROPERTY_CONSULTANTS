@@ -5,9 +5,11 @@ import heroBg from "@/assets/hero-bg.jpg";
 import hydDrone1 from "@/assets/main-video.mp4";
 import { heroContent } from "@/data/content";
 
+// Global cache flag to ensure the video loader only ever plays once per browsing session
+let globalVideoLoaded = false;
 
 const HeroSection = () => {
-  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const [isVideoLoaded, setIsVideoLoaded] = useState(globalVideoLoaded);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const containerRef = useRef(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -17,6 +19,25 @@ const HeroSection = () => {
       setIsVideoLoaded(true);
     }
   }, []);
+
+  // Anti-suspend hack for mobile browsers pausing heavy videos on scroll
+  useEffect(() => {
+    if (!isMobile || !videoRef.current) return;
+    
+    const ensurePlay = () => {
+      if (videoRef.current?.paused) {
+        videoRef.current.play().catch(() => {});
+      }
+    };
+
+    window.addEventListener("scroll", ensurePlay, { passive: true });
+    window.addEventListener("touchstart", ensurePlay, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", ensurePlay);
+      window.removeEventListener("touchstart", ensurePlay);
+    };
+  }, [isMobile]);
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -59,7 +80,10 @@ const HeroSection = () => {
           x5-playsinline="true"
           disablePictureInPicture
           preload="auto"
-          onLoadedData={() => setIsVideoLoaded(true)}
+          onLoadedData={() => {
+            setIsVideoLoaded(true);
+            globalVideoLoaded = true;
+          }}
           className={`w-full h-full object-cover pointer-events-none transition-opacity duration-1000 ease-in-out ${isVideoLoaded ? "opacity-100" : "opacity-0"}`}
         >
           <source src={hydDrone1} type="video/mp4" />
