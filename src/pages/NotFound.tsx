@@ -5,7 +5,12 @@ const NotFound = () => {
   const location = useLocation();
 
   useEffect(() => {
+    document.title = "404 - Page Not Found | Hyderabad Property Consultants";
     console.error("404 Error: User attempted to access non-existent route:", location.pathname);
+    
+    return () => {
+      document.title = "Hyderabad Property Consultants | Find Your Dream Property";
+    };
   }, [location.pathname]);
 
   return (

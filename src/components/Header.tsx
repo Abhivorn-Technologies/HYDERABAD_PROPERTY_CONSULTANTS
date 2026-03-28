@@ -40,7 +40,7 @@ const Header = () => {
   const isCompanyActive = companyDropdownLinks.some((link) => isActive(link.href));
 
   const isHomePage = location.pathname === "/";
-  const headerBg = (scrolled || !isHomePage)
+  const headerBg = (scrolled || !isHomePage || mobileOpen)
     ? "bg-[#05080a] shadow-luxury py-3"
     : "bg-transparent py-5";
 
