@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
 import heroBg from "@/assets/hero-bg.jpg";
-import hydDrone1 from "@/assets/hyd-drone1.mp4";
+import hydDrone1 from "@/assets/main-video.mp4";
 import { heroContent } from "@/data/content";
 
 
@@ -14,7 +14,8 @@ const HeroSection = () => {
   });
 
   const videoY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const videoScale = useTransform(scrollYProgress, [0, 1], [1.1, 1.3]);
+  // Keep scale at 1 to prevent blurring/pixelation from artificial zoom
+  const videoScale = useTransform(scrollYProgress, [0, 1], [1, 1.05]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
@@ -39,8 +40,7 @@ const HeroSection = () => {
         >
           <source src={hydDrone1} type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-primary/40" />
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/50 via-transparent to-primary/60" />
+        {/* Removed all dark overlays so the video is 100% visible and bright */}
       </motion.div>
 
 
