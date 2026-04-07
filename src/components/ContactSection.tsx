@@ -21,7 +21,7 @@ type FormData = z.infer<typeof contactSchema>;
 const ContactSection = () => {
   const ref = useRef(null);
   const formRef = useRef<HTMLFormElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.15, margin: "-40px" });
+  const inView = useInView(ref, { amount: 0.15, margin: "-40px" });
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});

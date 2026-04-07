@@ -1,5 +1,5 @@
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { TrendingUp, Star, MapPin } from "lucide-react";
 import investmentBg from "@/assets/investment-bg.jpg";
 import vid1 from "@/assets/vid1.mp4";
@@ -7,19 +7,26 @@ import { investmentAreas } from "@/data/content";
 
 const InvestmentSection = () => {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, amount: 0.05 });
+  const inView = useInView(ref, { amount: 0.05 });
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"]
   });
 
-  const videoY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+  const videoY = useTransform(scrollYProgress, [0, 1], isMobile ? ["0%", "0%"] : ["-5%", "5%"]);
 
   return (
     <section id="investment" className="relative section-padding overflow-hidden bg-cover bg-center" ref={ref} style={{ backgroundImage: `url(${investmentBg})` }}>
       <div className="absolute inset-0">
-        <motion.div style={{ y: videoY }} className="absolute inset-0">
+        <motion.div style={{ y: videoY }} className="absolute inset-0 will-change-transform">
           <video
             autoPlay
             muted
@@ -47,7 +54,7 @@ const InvestmentSection = () => {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {investmentAreas.map((area, i) => (
-            <motion.div key={area.name} initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: i * 0.08 }} className="investment-card p-7 cursor-pointer group">
+            <motion.div key={area.name} initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: i * 0.05 }} className="investment-card p-7 cursor-pointer group">
               <div className="flex items-center gap-3 mb-5 group-hover:translate-x-1 transition-transform">
                 <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center shrink-0 border border-secondary/20 group-hover:bg-secondary/20 transition-all">
                   <MapPin className="text-secondary" size={20} />

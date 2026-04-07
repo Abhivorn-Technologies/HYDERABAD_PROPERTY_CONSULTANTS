@@ -5,7 +5,7 @@ import { faqs } from "@/data/content";
 
 const FAQSection = () => {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, amount: 0.1 });
+  const inView = useInView(ref, { amount: 0.1 });
   const [open, setOpen] = useState<number | null>(0);
 
   return (
@@ -24,7 +24,7 @@ const FAQSection = () => {
               key={i}
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: i * 0.08 }}
+              transition={{ duration: 0.4, delay: i * 0.04 }}
               className="site-card rounded-xl overflow-hidden"
             >
               <button

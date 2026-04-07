@@ -5,7 +5,7 @@ import { aboutContent, stats } from "@/data/content";
 
 const Counter = ({ target, suffix }: { target: number; suffix: string }) => {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true });
+  const inView = useInView(ref);
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -30,14 +30,14 @@ const Counter = ({ target, suffix }: { target: number; suffix: string }) => {
 
 const AboutSection = () => {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, amount: 0.2, margin: "-50px" });
+  const inView = useInView(ref, { amount: 0.2, margin: "-50px" });
 
   return (
     <section id="about" className="section-padding" ref={ref}>
       <div className="container mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <motion.div initial={{ opacity: 0, x: -40 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.7 }} className="relative rounded-2xl overflow-hidden shadow-luxury">
-            <img src={aboutBg} alt="Real estate consultation" className="w-full h-[400px] lg:h-[500px] object-cover" loading="lazy" />
+          <motion.div initial={{ opacity: 0, x: -40 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.7 }} className="relative rounded-2xl overflow-hidden shadow-luxury bg-white">
+            <img src={aboutBg} alt="Real estate consultation" className="w-full h-auto object-contain" loading="lazy" />
             <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent" />
           </motion.div>
 

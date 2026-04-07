@@ -4,7 +4,7 @@ import { whyChooseUsPoints } from "@/data/content";
 
 const WhyChooseUs = () => {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, amount: 0.1 });
+  const inView = useInView(ref, { amount: 0.1 });
 
   return (
     <section id="why-us" className="relative section-padding overflow-hidden" ref={ref}>

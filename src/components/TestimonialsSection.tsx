@@ -5,7 +5,7 @@ import { testimonials } from "@/data/content";
 
 const TestimonialsSection = () => {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, amount: 0.05 });
+  const inView = useInView(ref, { amount: 0.05 });
   const [current, setCurrent] = useState(0);
 
   const next = () => setCurrent((c) => (c + 1) % testimonials.length);
