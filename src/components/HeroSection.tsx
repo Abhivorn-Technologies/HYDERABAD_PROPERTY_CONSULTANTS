@@ -50,9 +50,9 @@ const HeroSection = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const videoY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const videoY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
   // Keep scale at 1 to prevent blurring/pixelation from artificial zoom
-  const videoScale = useTransform(scrollYProgress, [0, 1], [1, 1.05]);
+  const videoScale = useTransform(scrollYProgress, [0, 1], [1, 1.03]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
@@ -63,7 +63,7 @@ const HeroSection = () => {
     >
       <motion.div 
         style={isMobile ? {} : { y: videoY, scale: videoScale, opacity }} 
-        className="absolute inset-0 bg-[#05080a]"
+        className="absolute inset-0 bg-[#05080a] will-change-transform"
       >
         {/* Elegant Loading Spinner shown until video is ready */}
         <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-700 ${isVideoLoaded ? "opacity-0 invisible" : "opacity-100"}`}>

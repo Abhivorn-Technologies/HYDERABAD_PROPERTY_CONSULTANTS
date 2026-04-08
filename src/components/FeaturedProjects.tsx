@@ -27,7 +27,7 @@ const imageMap: Record<string, string> = {
 
 const FeaturedProjects = () => {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, amount: 0.05 });
+  const inView = useInView(ref, { amount: 0.05 });
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
@@ -67,7 +67,7 @@ const FeaturedProjects = () => {
                   <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={inView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.5, delay: i * 0.1 }}
+                    transition={{ duration: 0.5, delay: i * 0.05 }}
                     className="group site-card rounded-2xl overflow-hidden hover:-translate-y-2 transition-all duration-500 h-full cursor-pointer flex flex-col"
                   >
                     <div className="relative overflow-hidden h-52 sm:h-56">

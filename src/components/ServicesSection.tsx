@@ -4,7 +4,7 @@ import { services } from "@/data/content";
 
 const ServicesSection = () => {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, amount: 0.05 });
+  const inView = useInView(ref, { amount: 0.05 });
 
   return (
     <section id="services" className="section-padding relative overflow-hidden" ref={ref}>

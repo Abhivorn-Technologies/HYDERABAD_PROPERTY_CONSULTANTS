@@ -4,7 +4,7 @@ import { processSteps } from "@/data/content";
 
 const HowWeWork = () => {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, amount: 0.05 });
+  const inView = useInView(ref, { amount: 0.05 });
 
   return (
     <section id="process" className="section-padding" ref={ref}>
@@ -20,7 +20,7 @@ const HowWeWork = () => {
           <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-border -translate-y-1/2" />
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {processSteps.map((step, i) => (
-              <motion.div key={step.num} initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: i * 0.12 }} className="relative site-card rounded-2xl p-8 text-center hover:-translate-y-2 transition-all duration-500">
+              <motion.div key={step.num} initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: i * 0.05 }} className="relative site-card rounded-2xl p-8 text-center hover:-translate-y-2 transition-all duration-500">
                 <div className="w-14 h-14 rounded-full gradient-gold-btn flex items-center justify-center mx-auto mb-5">
                   <span className="text-lg font-bold">{step.num}</span>
                 </div>
