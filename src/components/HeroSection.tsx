@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useRef, useState, useEffect } from "react";
 import heroBg from "@/assets/hero-bg.jpg";
-import hydDrone1 from "@/assets/main-video.mp4";
+const HERO_VIDEO_URL = "https://res.cloudinary.com/df6com04s/video/upload/q_90,vc_h264/v1776764384/main-video_bqyvn4.mp4";
 import { heroContent } from "@/data/content";
 
 // Global cache flag to ensure the video loader only ever plays once per browsing session
@@ -65,10 +65,8 @@ const HeroSection = () => {
         style={isMobile ? {} : { y: videoY, scale: videoScale, opacity }} 
         className="absolute inset-0 bg-[#05080a] will-change-transform"
       >
-        {/* Elegant Loading Spinner shown until video is ready */}
-        <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-700 ${isVideoLoaded ? "opacity-0 invisible" : "opacity-100"}`}>
-          <div className="w-12 h-12 border-4 border-secondary/20 border-t-secondary rounded-full animate-spin"></div>
-        </div>
+        {/* Poster image handles the loading state - no need for spinner */}
+        <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-700 opacity-0 invisible`}></div>
 
         <video
           ref={videoRef}
@@ -79,14 +77,15 @@ const HeroSection = () => {
           webkit-playsinline="true"
           x5-playsinline="true"
           disablePictureInPicture
-          preload="auto"
+          preload="metadata"
+          poster={heroBg}
           onLoadedData={() => {
             setIsVideoLoaded(true);
             globalVideoLoaded = true;
           }}
-          className={`w-full h-full object-cover pointer-events-none transition-opacity duration-1000 ease-in-out ${isVideoLoaded ? "opacity-100" : "opacity-0"}`}
+          className={`w-full h-full object-cover pointer-events-none transition-opacity duration-1000 ease-in-out opacity-100`}
         >
-          <source src={hydDrone1} type="video/mp4" />
+          <source src={HERO_VIDEO_URL} type="video/mp4" />
         </video>
         {/* Removed all dark overlays so the video is 100% visible and bright */}
       </motion.div>
